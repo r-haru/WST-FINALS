@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Speakeasy Bar</title>
+    <link rel="stylesheet" href="styles.css">
+    <style>
+        body, html {
+            margin: 0;
+            padding: 0;
+            height: 100%;
+            font-family: Arial, sans-serif;
+        }
+
+        .background-image {
+            background-image: url(images/mainbg.jpg); 
+            background-size: cover;
+            background-position: center;
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            color: white;
+        }
+
+        .navbar {
+            position: absolute;
+            top: 20px;
+            width: 100%;
+            display: flex;
+            justify-content: center;
+        }
+
+        .nav-container {
+            background-color: rgba(53, 51, 51, 0.7);
+            border-radius: 10px; 
+            padding: 10px 20px; 
+        }
+
+        .nav-container a {
+            margin: 0 15px;
+            color: rgb(147, 164, 215);
+            text-decoration: none;
+            font-size: 18px;
+        }
+
+        .logo-container {
+            text-align: center;
+            display: flex;
+            flex-direction: column; 
+            align-items: center;    
+        }
+
+        .logo {
+            width: 650px; 
+            height: 550px; 
+            object-fit: cover; 
+            border: 5px solid white;
+            border-radius: 10px;
+            margin-bottom: 10px; 
+        }
+
+        .enter-button {
+            background-color: rgb(9, 9, 83);
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 16px;
+            margin-top: 10px; 
+        }
+
+        .footer {
+            position: absolute;
+            bottom: 20px;
+            display: flex;
+            justify-content: center;
+        }
+
+        .footer-container {
+            background-color: rgba(0, 0, 0, 0.7); 
+            border-radius: 10px; 
+            padding: 10px; 
+        }
+
+        .footer img {
+            width: 30px; 
+            margin: 0 10px;
+        }
+
+        .popup {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: rgba(0, 0, 0, 0.8);
+            justify-content: center;
+            align-items: center;
+        }
+
+        .popup-content {
+            background: white;
+            color: black;
+            padding: 20px;
+            border-radius: 10px;
+            text-align: center;
+        }
+
+        .popup button {
+            margin: 10px;
+        }
+    </style>
+</head>
+<body>
+    <div class="background-image">
+        <div class="logo-container">
+            <img src="images/Logo.jpg" alt="Logo" class="logo">
+            <button class="enter-button" onclick="showPopup()">Enter</button>
+        </div>
+        <footer class="footer">
+            <div class="footer-container">
+                <a href="https://www.instagram.com/" target="_blank"><img src="images/ig.webp" alt="Instagram"></a>
+                <a href="https://www.facebook.com/" target="_blank"><img src="images/f.png" alt="Facebook"></a>
+                <a href="https://www.tiktok.com/en/" target="_blank"><img src="images/tktk.webp" alt="TikTok"></a>
+            </div>
+        </footer>
+    </div>
+
+    <div id="popup" class="popup">
+        <div class="popup-content">
+            <p>Are you over 21?</p>
+            <button onclick="closePopup('yes')">Yes</button>
+            <button onclick="closePopup('no')">No</button>
+        </div>
+    </div>
+
+    <script>
+        function showPopup() {
+            document.getElementById('popup').style.display = 'flex';
+        }
+
+        function closePopup(response) {
+            document.getElementById('popup').style.display = 'none';
+            if (response === 'yes') {
+                window.location.href = 'about us.html'; 
+            }
+            
+        }
+    </script>
+</body>
+</html>

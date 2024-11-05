@@ -1,0 +1,247 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Speakeasy Bar</title>
+    <link rel="stylesheet" href="styles.css">
+    <style>
+        body, html {
+            margin: 0;
+            padding: 0;
+            height: 100%;
+            font-family: Arial, sans-serif;
+        }
+
+        .background-image {
+            background-image: url(images/mainbg.jpg); 
+            background-size: cover;
+            background-position: center;
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            color: white;
+        }
+
+        .navbar {
+            position: absolute;
+            top: 20px;
+            width: 100%;
+            display: flex;
+            justify-content: center;
+        }
+
+        .nav-container {
+            background-color: rgba(53, 51, 51, 0.7);
+            border-radius: 10px; 
+            padding: 10px 20px; 
+        }
+
+        .nav-container a {
+            margin: 0 15px;
+            color: rgb(147, 164, 215);
+            text-decoration: none;
+            font-size: 18px;
+        }
+
+        .logo-container {
+            text-align: center;
+            display: flex;
+            flex-direction: column; 
+            align-items: center;    
+        }
+
+        .logo {
+            width: 650px; 
+            height: 550px; 
+            object-fit: cover; 
+            border: 5px solid white;
+            border-radius: 10px;
+            margin-bottom: 10px; 
+        }
+
+        .enter-button {
+            background-color: rgb(9, 9, 83);
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 16px;
+            margin-top: 10px; 
+        }
+
+        .footer {
+            position: absolute;
+            bottom: 20px;
+            display: flex;
+            justify-content: center;
+        }
+
+        .footer-container {
+            background-color: rgba(0, 0, 0, 0.7); 
+            border-radius: 10px; 
+            padding: 10px; 
+        }
+
+        .footer img {
+            width: 30px; 
+            margin: 0 10px;
+        }
+
+        .container {
+            padding: 30px;
+            text-align: center;
+            background: rgba(0, 0, 0, 0.7);
+            border-radius: 10px;
+            margin-top: 20px;
+        }
+
+        .map-container {
+            width: 550px;
+            height: 400px;
+            margin-bottom: 30px;
+        }
+
+        .map-container img {
+            width: 550px;
+            height: auto;
+            border-radius: 10px;
+        }
+
+        .directions {
+            background-color: #444;
+            padding: 20px;
+            border-radius: 10px;
+            width: 80%;
+            margin: 0 auto;
+            text-align: center;
+        }
+
+        .knock-message {
+            background-color: #222;
+            margin-top: 20px;
+            padding: 15px;
+            border-radius: 10px;
+            font-size: 1.2em;
+        }
+
+        .knock-box {
+            background-color: #3f48c1;
+            padding: 10px;
+            margin-top: 10px;
+            border-radius: 10px;
+            cursor: pointer;
+            display: inline-block;
+            transition: background-color 0.3s ease;
+        }
+
+        .knock-box:hover {
+            background-color: #ff6347;
+        }
+
+        .hidden-code {
+            display: none;
+            color: #7684e9;
+            margin-top: 20px;
+            font-size: 1.5em;
+        }
+        .popup {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: rgba(0, 0, 0, 0.8);
+            justify-content: center;
+            align-items: center;
+        }
+
+        .popup-content {
+            background: white;
+            color: black;
+            padding: 20px;
+            border-radius: 10px;
+            text-align: center;
+        }
+
+        .popup button {
+            margin: 10px;
+        }
+    </style>
+</head>
+<body>
+
+<div class="navbar">
+    <div class="nav-container">
+        <a href="index.html">Home</a>
+        <a href="about us.html">About Us</a>
+        <a href="access.html">Access</a>
+        <a href="#">Menu</a>
+        <a href="#">Promotions</a>
+    </div>
+</div>
+
+<div class="background-image">
+    <div class="container">
+        <div class="map-container">
+
+            <img src="images/Screenshot 2024-11-04 at 5.42.30 PM.png" alt="Speakeasy Location Map">
+        </div>
+
+        <div class="directions">
+            <p>To access the speakeasy, follow these simple steps:</p>
+            <p>Go down the alley, and find the <span style="color: #0b0315;">blue door</span>.</p>
+            <p>Knock three times, and the hidden machine will pop up. You will be prompted to enter the secret code.</p>
+        </div>
+
+        <div class="knock-message">
+            <p>Knock on the door below:</p>
+            <div class="knock-box" onclick="knock()">Knock three times</div>
+        </div>
+
+        <div class="hidden-code" id="secretCode">
+            <p>Access granted! The secret code is: <strong>BLUE123</strong></p>
+        </div>
+    </div>
+</div>
+
+
+<footer class="footer">
+    <div class="footer-container">
+        <a href="https://www.instagram.com/" target="_blank"><img src="images/ig.webp" alt="Instagram"></a>
+        <a href="https://www.facebook.com/" target="_blank"><img src="images/f.png" alt="Facebook"></a>
+        <a href="https://www.tiktok.com/en/" target="_blank"><img src="images/tktk.webp" alt="TikTok"></a>
+    </div>
+</footer>
+
+
+<script>
+    let knockCount = 0;
+
+    function knock() {
+        knockCount++;
+        if (knockCount === 3) {
+            document.getElementById("secretCode").style.display = "block";
+        } else {
+            alert("Knock again!");
+        }
+    }
+
+    function showPopup() {
+        document.getElementById('popup').style.display = 'flex';
+    }
+
+    function closePopup(response) {
+        document.getElementById('popup').style.display = 'none';
+        if (response === 'yes') {
+            window.location.href = 'about us.html'; 
+        }
+    }
+</script>
+
+</body>
+</html>
